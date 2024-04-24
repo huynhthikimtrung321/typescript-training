@@ -1,12 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@constants/*": ["constants/*"],
+      "@controllers/*": ["controllers/*"],
+      "@helpers/*": ["helpers/*"],
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@views/*": ["views/*"]
+    }
   },
   "include": ["./src"],
   "exclude": ["node_modules"]

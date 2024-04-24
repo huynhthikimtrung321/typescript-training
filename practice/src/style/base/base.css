@@ -1,0 +1,25 @@
+body {
+  font-family: 'poppins', sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

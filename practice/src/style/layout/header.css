@@ -1,0 +1,14 @@
+.header-container {
+  border-bottom: 2px var(--color-secondary) solid;
+}
+
+.avatar-image {
+  width: 70px;
+  height: 70px;
+}
+
+.header-title {
+  line-height: 64px;
+  font-size: var(--font-size-l);
+  color: var(--color-primary);
+}

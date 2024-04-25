@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style/main.css">
+  <title>Practice two</title>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <h1 class="header-title">
+        <a href="">Kim Trung Cosmetics</a>
+      </h1>
+    </div>
+  </header>
+  <main class="main-content container main-container">
+  </main>
+  <div class="modal modal-delete-container hidden">
+    <div class="modal-delete-content">
+      <svg class="warning-icon">
+        <use xlink:href="./asset/images/icon.svg#warning-icon"></use>
+      </svg>
+      <h4 class="modal-title-delete">Are you sure to delete this product?</h4>
+      <p>This product will be deleted and cannot be restored</p>
+      <div class="modal-delete-btn">
+        <button class="btn-delete">Delete</button>
+        <button class="btn-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal modal-overlay spinner-modal hidden">
+    <span class="spinner"></span>
+  </div>
+  <script type="module" src="./scripts/main.ts"></script>
+</body>
+</html>

@@ -13,3 +13,30 @@ export enum PRODUCT_STATUS {
   NEW_ARRIVAL = 'New arrival',
   LOW_STOCK = 'Low stock',
 }
+
+export const PRODUCT_LABEL = {
+  name: {
+    textContent: 'Product name',
+  },
+  category: {
+    textContent: 'Category',
+  },
+  SKU: {
+    textContent: 'SKU',
+  },
+  Quantity: {
+    textContent: 'Quantity',
+  },
+  Cost: {
+    textContent: 'Cost',
+  },
+  price: {
+    textContent: 'Price',
+  },
+  status: {
+    textContent: 'Status',
+  },
+  action: {
+    textContent: 'Action',
+  },
+};

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style/main.css">
   <title>Practice two</title>
 </head>
+
 <body>
   <header>
     <div class="container header-container">
@@ -17,9 +19,7 @@
   <main class="main-content container main-container">
     <div class="flex-space-between">
       <svg class="icon-search">
-        <use
-          xlink:href="asset/images/icon.svg#icon-search"
-        ></use>
+        <use xlink:href="asset/images/icon.svg#icon-search"></use>
       </svg>
       <input type="text" class="input-search" placeholder="Search product">
       <div class="button-filter-group">
@@ -34,6 +34,10 @@
         <button class="btn-reset">Reset</button>
       </div>
       <button id="toggle-form" class="button-add-product">Add new product</button>
+    </div>
+    <div class="table-container">
+      <div class="product-row product-header text-large">
+      </div>
     </div>
   </main>
   <div class="modal modal-delete-container hidden">
@@ -54,4 +58,5 @@
   </div>
   <script type="module" src="./scripts/main.ts"></script>
 </body>
+
 </html>

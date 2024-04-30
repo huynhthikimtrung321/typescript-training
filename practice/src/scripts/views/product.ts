@@ -3,6 +3,8 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
+import { PRODUCT_LABEL } from '../constants/labels';
+import { LabelHtml } from '../types/label';
 
 export default class ProductView {
   constructor(mainContentSelector: string) {
@@ -16,6 +18,7 @@ export default class ProductView {
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
+    this.renderTableHeader(PRODUCT_LABEL);
   };
 
   renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
@@ -27,6 +30,20 @@ export default class ProductView {
     });
     if (statusSelect) {
       statusSelect.innerHTML = allOptions;
+    }
+  };
+
+  renderTableHeader = (labelHtmls: LabelHtml) => {
+    const tableHeaderElement = document.querySelector(
+      '.product-row.product-header'
+    );
+    let headerHtml = ``;
+    for (const label in labelHtmls) {
+      const labelHtml = `<div data-field="${label}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
+      headerHtml += labelHtml;
+    }
+    if (tableHeaderElement) {
+      tableHeaderElement.innerHTML += headerHtml;
     }
   };
 }

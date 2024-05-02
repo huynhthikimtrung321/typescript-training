@@ -4,7 +4,7 @@ import { PRODUCT_STATUS, PRODUCT_TYPE } from './labels';
 export const ProductStatusOptions: SelectOption[] = [
   {
     label: PRODUCT_STATUS.ALL_STATUS,
-    value: PRODUCT_STATUS.ALL_STATUS,
+    value: '',
     selected: true,
     classes: 'product-status-option',
   },
@@ -38,7 +38,7 @@ export const ProductStatusOptions: SelectOption[] = [
 export const ProductTypeOptions: SelectOption[] = [
   {
     label: PRODUCT_TYPE.ALL_CATEGORY,
-    value: PRODUCT_TYPE.ALL_CATEGORY,
+    value: '',
     selected: true,
     classes: 'product-status-option',
   },

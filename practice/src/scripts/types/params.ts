@@ -1,3 +1,5 @@
 export type FilterParam = {
-  name: string;
+  name?: string;
+  status?: string;
+  category?: string;
 };

@@ -111,9 +111,7 @@ export default class ProductView {
     const mainContent = document.querySelector('.main-content') as HTMLElement;
     if (!mainContent) return;
 
-    const filterParams: FilterParam = {
-      name: '',
-    };
+    const filterParams: FilterParam = {};
 
     mainContent.addEventListener('keyup', (event: KeyboardEvent) => {
       const target = event.target as HTMLInputElement;
@@ -122,6 +120,24 @@ export default class ProductView {
 
       const searchValue = target.value.toLowerCase();
       filterParams.name = searchValue;
+      renderProducts(filterParams);
+    });
+
+    mainContent.addEventListener('change', (event: Event) => {
+      const target = event.target as HTMLElement;
+      if (!target.dataset['buttonFilter']) return;
+
+      const statusElement = document.getElementById(
+        'select-status'
+      ) as HTMLSelectElement;
+      const categoryElement = document.getElementById(
+        'select-category'
+      ) as HTMLSelectElement;
+
+      filterParams.status = statusElement.value;
+      filterParams.category = categoryElement.value;
+      console.log(filterParams.status);
+
       renderProducts(filterParams);
     });
   };

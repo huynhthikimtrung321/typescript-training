@@ -6,6 +6,7 @@ import {
 import { PRODUCT_LABEL, PRODUCT_STATUS_CLASS } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
+import { FilterParam } from 'scripts/types/params';
 import icon from '../../asset/images/icon.svg';
 
 export default class ProductView {
@@ -104,5 +105,24 @@ export default class ProductView {
     if (tableHeaderElement) {
       tableHeaderElement.innerHTML += headerHtml;
     }
+  };
+
+  bindFilterProduct = renderProducts => {
+    const mainContent = document.querySelector('.main-content') as HTMLElement;
+    if (!mainContent) return;
+
+    const filterParams: FilterParam = {
+      name: '',
+    };
+
+    mainContent.addEventListener('keyup', (event: KeyboardEvent) => {
+      const target = event.target as HTMLInputElement;
+      if (!target.classList.contains('input-search') || event.key !== 'Enter')
+        return;
+
+      const searchValue = target.value.toLowerCase();
+      filterParams.name = searchValue;
+      renderProducts(filterParams);
+    });
   };
 }

@@ -11,9 +11,10 @@ export default class ProductController {
     this.productModel = model;
   }
 
-  public initialize(): void {
+  public async initialize() {
     this.productView.initView();
-    this.renderProducts({}, []);
+    await this.renderProducts({}, []);
+    this.productView.bindFilterProduct(this.renderProducts);
   }
 
   /**
@@ -34,5 +35,9 @@ export default class ProductController {
     } finally {
       this.productView.displayProducts(products, false);
     }
+  };
+
+  handleFilterProducts = (params = {}) => {
+    this.renderProducts(params);
   };
 }

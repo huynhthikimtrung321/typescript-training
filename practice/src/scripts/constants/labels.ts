@@ -14,6 +14,14 @@ export enum PRODUCT_STATUS {
   LOW_STOCK = 'Low stock',
 }
 
+export const PRODUCT_STATUS_CLASS = {
+  'Best-seller': 'best-seller-label',
+  'Poor seller': 'poor-seller-label',
+  'On sale': 'on-sale-label',
+  'New arrival': 'new-arrival-label',
+  'Low stock': 'low-stock-label',
+};
+
 export const PRODUCT_LABEL = {
   name: {
     textContent: 'Product name',

@@ -6,16 +6,19 @@ import {
 import { PRODUCT_LABEL, PRODUCT_STATUS_CLASS } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
-import { FilterParam } from 'scripts/types/params';
+import { FilterParam, SortParam } from 'scripts/types/params';
 import icon from '../../asset/images/icon.svg';
 
 export default class ProductView {
+  mainContent: HTMLElement;
   constructor(mainContentSelector: string) {
     const mainContentElement = document.querySelector(mainContentSelector);
 
     if (!mainContentElement) {
       throw new Error('Main content element not found');
     }
+
+    this.mainContent = mainContentElement as HTMLElement;
   }
 
   initView = () => {
@@ -46,7 +49,7 @@ export default class ProductView {
           products;
         const statusClass = PRODUCT_STATUS_CLASS[status];
         const productRowElement = `
-				<li class="product-row product-item">
+				<li class="product-row product-item" data-field="name" data-sort-label="true">
 					<h2 class="text-responsive">${name}</h2>
 					<p class="text-responsive">${category}</p>
 					<p class="text-responsive">${sku}</p>
@@ -99,7 +102,7 @@ export default class ProductView {
     );
     let headerHtml = ``;
     for (const label in labelHtmls) {
-      const labelHtml = `<div data-field="${label}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
+      const labelHtml = `<div data-field="${label}" class="${label !== 'action' ? 'arrow-down-up' : ''}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {
@@ -107,7 +110,7 @@ export default class ProductView {
     }
   };
 
-  bindFilterProduct = renderProducts => {
+  bindFilterProduct = (renderProducts: (params: FilterParam) => void) => {
     const mainContent = document.querySelector('.main-content') as HTMLElement;
     if (!mainContent) return;
 
@@ -141,4 +144,48 @@ export default class ProductView {
       renderProducts(filterParams);
     });
   };
+
+  bindSortProduct(handleSortProducts: (params: SortParam) => void) {
+    this.mainContent.addEventListener('click', event => {
+      const target = event.target as HTMLElement;
+      if (!target.dataset['sortLabel']) return;
+
+      const targetField = target.dataset['field'];
+      if (!targetField) return;
+
+      // Gets all labels and remove their arrows except the target
+      if (target.parentNode !== null) {
+        const targetSiblings = Array.from(target.parentNode.children);
+        targetSiblings
+          .filter(sibling => sibling !== target)
+          .forEach(sibling => {
+            sibling.classList.remove('arrow-up');
+            sibling.classList.remove('arrow-down');
+          });
+      }
+
+      const isArrowDown = target.classList.contains('arrow-down');
+      const isArrowUp = target.classList.contains('arrow-up');
+
+      if (!isArrowDown && !isArrowUp) {
+        target.classList.add('arrow-down');
+        target.classList.remove('arrow-down-up');
+        handleSortProducts({
+          sortBy: targetField.toLowerCase(),
+          order: 'desc',
+        });
+      } else if (isArrowDown) {
+        target.classList.remove('arrow-down');
+        target.classList.add('arrow-up');
+        handleSortProducts({
+          sortBy: targetField.toLowerCase(),
+          order: 'asc',
+        });
+      } else if (isArrowUp) {
+        target.classList.remove('arrow-up');
+        target.classList.add('arrow-down-up');
+        handleSortProducts({}); // Assume reset to default sort
+      }
+    });
+  }
 }

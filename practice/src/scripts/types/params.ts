@@ -3,3 +3,8 @@ export type FilterParam = {
   status?: string;
   category?: string;
 };
+
+export type SortParam = {
+  sortBy?: string;
+  order?: 'asc' | 'desc';
+};

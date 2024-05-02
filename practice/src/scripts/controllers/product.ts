@@ -15,6 +15,7 @@ export default class ProductController {
     this.productView.initView();
     await this.renderProducts({}, []);
     this.productView.bindFilterProduct(this.renderProducts);
+    this.productView.bindSortProduct(this.handleSortProducts);
   }
 
   /**
@@ -38,6 +39,10 @@ export default class ProductController {
   };
 
   handleFilterProducts = (params = {}) => {
+    this.renderProducts(params);
+  };
+
+  handleSortProducts = (params = {}) => {
     this.renderProducts(params);
   };
 }

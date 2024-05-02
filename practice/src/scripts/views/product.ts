@@ -111,7 +111,7 @@ export default class ProductView {
     const mainContent = document.querySelector('.main-content') as HTMLElement;
     if (!mainContent) return;
 
-    const filterParams: FilterParam = {};
+    let filterParams: FilterParam = {};
 
     mainContent.addEventListener('keyup', (event: KeyboardEvent) => {
       const target = event.target as HTMLInputElement;
@@ -136,9 +136,15 @@ export default class ProductView {
 
       filterParams.status = statusElement.value;
       filterParams.category = categoryElement.value;
-      console.log(filterParams.status);
 
       renderProducts(filterParams);
+    });
+
+    mainContent.addEventListener('click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      if (!target.classList.contains('btn-reset')) return;
+      filterParams = {};
+      renderProducts({});
     });
   };
 }

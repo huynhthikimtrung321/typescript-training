@@ -29,5 +29,8 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.7.1"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3"
   }
 }

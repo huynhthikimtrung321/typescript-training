@@ -8,6 +8,7 @@ import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import { FilterParam, SortParam } from 'scripts/types/params';
 import icon from '../../asset/images/icon.svg';
+import { formProductTemplate } from './template/formProduct';
 
 export default class ProductView {
   mainContent: HTMLElement;
@@ -25,6 +26,7 @@ export default class ProductView {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
     this.renderTableHeader(PRODUCT_LABEL);
+    this.bindToggleFormProduct();
   };
 
   displayProducts(products: Product[], isLoading: boolean) {
@@ -94,6 +96,20 @@ export default class ProductView {
     if (statusSelect) {
       statusSelect.innerHTML = allOptions;
     }
+  };
+
+  bindToggleFormProduct = () => {
+    document.getElementById('toggle-form')?.addEventListener('click', () => {
+      const formProductWrapper = document.getElementById(
+        'form-product-wrapper'
+      );
+
+      if (formProductWrapper === null) {
+        return;
+      }
+
+      formProductWrapper.innerHTML += formProductTemplate(false);
+    });
   };
 
   renderTableHeader = (labelHtmls: LabelHtml) => {

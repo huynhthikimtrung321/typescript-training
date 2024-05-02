@@ -1,6 +1,6 @@
 export type Product = {
   id: string;
-  category: string;
+  category: 'Skin care' | 'Face care' | 'Lips care';
   cost: number;
   name: string;
   price: number;

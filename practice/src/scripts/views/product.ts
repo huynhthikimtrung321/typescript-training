@@ -3,7 +3,7 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABELS, PRODUCT_STATUS_CLASSES } from '../constants/labels';
+import { PRODUCT_LABELS } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import icon from '../../asset/images/icon.svg';
@@ -43,7 +43,6 @@ export default class ProductView {
       products.map(products => {
         const { id, name, category, sku, quantity, cost, price, status } =
           products;
-        const statusClass = PRODUCT_STATUS_CLASSES[status];
         const productRowElement = `
 				<li class="product-row product-item">
 					<h2 class="text-responsive">${name}</h2>
@@ -52,7 +51,7 @@ export default class ProductView {
 					<p class="text-responsive">${quantity}</p>
 					<p class="text-responsive">${cost}</p>
 					<p class="text-responsive">${price}</p>
-					<p class="text-responsive label ${statusClass}">${status}</p>
+					<p class="text-responsive label ${status}">${status}</p>
 					<div class="btn-actions-group">
 						<button class="btn-action btn-edit-product" data-product-id="${id}">
 							<svg width="20" height="20" fill="blue" viewBox="0 0 24 24">

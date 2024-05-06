@@ -1,5 +1,17 @@
 import { LabelHtml } from 'scripts/types/label';
 
+const PRODUCT_STATUS_LABEL: ProductStatusLabel = {
+  bestSeller: 'Best-seller',
+  poorSeller: 'Poor seller',
+  onSale: 'On sale',
+  newArrival: 'New arrival',
+  lowStock: 'Low stock',
+};
+
+interface ProductStatusLabel {
+  [key: PRODUCT_STATUS]: string;
+}
+
 export enum PRODUCT_TYPE {
   ALL_CATEGORY = 'All category',
   SKIN_CARE = 'Skin care',
@@ -9,20 +21,20 @@ export enum PRODUCT_TYPE {
 
 export enum PRODUCT_STATUS {
   ALL_STATUS = 'All status',
-  BEST_SELLER = 'Best-seller',
-  POOR_SELLER = 'Poor seller',
-  ON_SALE = 'On sale',
-  NEW_ARRIVAL = 'New arrival',
-  LOW_STOCK = 'Low stock',
+  BEST_SELLER = 'bestSeller',
+  POOR_SELLER = 'poorSeller',
+  ON_SALE = 'onSale',
+  NEW_ARRIVAL = 'newArrival',
+  LOW_STOCK = 'lowStock',
 }
 
-export const PRODUCT_STATUS_CLASSES = {
-  'Best-seller': 'best-seller-label',
-  'Poor seller': 'poor-seller-label',
-  'On sale': 'on-sale-label',
-  'New arrival': 'new-arrival-label',
-  'Low stock': 'low-stock-label',
-};
+// export const PRODUCT_STATUS_CLASSES = {
+//   bestSeller: 'best-seller-label',
+//   poorSeller: 'poor-seller-label',
+//   onSale: 'on-sale-label',
+//   newArrival: 'new-arrival-label',
+//   lowStock: 'low-stock-label',
+// } as const;
 
 export const PRODUCT_LABELS: LabelHtml = [
   {

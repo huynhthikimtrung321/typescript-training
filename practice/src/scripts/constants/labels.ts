@@ -1,3 +1,5 @@
+import { LabelHtml } from 'scripts/types/label';
+
 export enum PRODUCT_TYPE {
   ALL_CATEGORY = 'All category',
   SKIN_CARE = 'Skin care',
@@ -22,29 +24,37 @@ export const PRODUCT_STATUS_CLASS = {
   'Low stock': 'low-stock-label',
 };
 
-export const PRODUCT_LABEL = {
-  name: {
-    textContent: 'Product name',
+export const PRODUCT_LABELS: LabelHtml = [
+  {
+    field: 'name',
+    label: 'Product name',
   },
-  category: {
-    textContent: 'Category',
+  {
+    field: 'category',
+    label: 'Category',
   },
-  SKU: {
-    textContent: 'SKU',
+  {
+    field: 'sku',
+    label: 'SKU',
   },
-  Quantity: {
-    textContent: 'Quantity',
+  {
+    field: 'quantity',
+    label: 'Quantity',
   },
-  Cost: {
-    textContent: 'Cost',
+  {
+    field: 'cost',
+    label: 'Cost',
   },
-  price: {
-    textContent: 'Price',
+  {
+    field: 'price',
+    label: 'Price',
   },
-  status: {
-    textContent: 'Status',
+  {
+    field: 'status',
+    label: 'Status',
   },
-  action: {
-    textContent: 'Action',
+  {
+    field: 'action',
+    label: 'Action',
   },
-};
+];

@@ -3,7 +3,7 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABEL, PRODUCT_STATUS_CLASS } from '../constants/labels';
+import { PRODUCT_LABELS, PRODUCT_STATUS_CLASS } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import icon from '../../asset/images/icon.svg';
@@ -20,7 +20,7 @@ export default class ProductView {
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
-    this.renderTableHeader(PRODUCT_LABEL);
+    this.renderTableHeader(PRODUCT_LABELS);
   };
 
   displayProducts(products: Product[], isLoading: boolean) {
@@ -97,8 +97,8 @@ export default class ProductView {
       '.product-row.product-header'
     );
     let headerHtml = ``;
-    for (const label in labelHtmls) {
-      const labelHtml = `<div data-field="${label}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
+    for (const label of labelHtmls) {
+      const labelHtml = `<div data-field="${label.field}" data-sort-label="true">${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {

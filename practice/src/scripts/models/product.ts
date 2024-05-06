@@ -24,6 +24,13 @@ export default class ProductModel {
   }
 
   /**
+   * Gets product by its id
+   */
+  async getProduct(id: string) {
+    return await this.httpService.get<Product>(`${PRODUCT_ENDPOINT}/${id}`);
+  }
+
+  /**
    * Adds a product then return the new products
    */
   async addProduct(product: Product) {

@@ -21,7 +21,7 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
     .join('');
 
   return `
-  <div class="modal-overlay">
+  <div class="modal-overlay modal-overlay-form">
     <form action="javascript:void(0)" method="post" class="form-container">
       <h2 class="modal-form-title">${isEditForm ? 'Edit Product' : 'Add Product'}</h2>
       <div class="form-group">

@@ -43,13 +43,14 @@ export default class ProductView {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
     this.renderTableHeader(PRODUCT_LABEL);
-    this.bindToggleFormProduct();
   };
 
-  removeModal() {
-    const modalOverlays = document.querySelectorAll('.modal-overlay');
+  removeModal(elementName: string) {
+    const modalOverlay = document.querySelector(
+      `.modal-overlay-${elementName}`
+    );
 
-    modalOverlays.forEach(modal => modal.remove());
+    modalOverlay?.remove();
   }
 
   displaySpinner = () => toggleSpinner(true);
@@ -113,6 +114,20 @@ export default class ProductView {
     mainContent.innerHTML += listItemHTML;
   }
 
+  displayProductForm(isEditForm: boolean, product?: Product) {
+    const formProductWrapper = document.getElementById('form-product-wrapper');
+
+    if (formProductWrapper === null) {
+      return;
+    }
+
+    if (isEditForm) {
+      formProductWrapper.innerHTML += formProductTemplate(true, product);
+    } else {
+      formProductWrapper.innerHTML += formProductTemplate(false);
+    }
+  }
+
   renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
@@ -125,17 +140,32 @@ export default class ProductView {
     }
   };
 
-  bindToggleFormProduct = () => {
+  bindToggleFormProduct = (
+    handleShowEditForm: (id: string) => Promise<void>
+  ) => {
     document.getElementById('toggle-form')?.addEventListener('click', () => {
-      const formProductWrapper = document.getElementById(
-        'form-product-wrapper'
-      );
+      this.displayProductForm(false);
+    });
 
-      if (formProductWrapper === null) {
+    document.addEventListener('click', event => {
+      const target = event.target as HTMLElement;
+      const btnTarget = target.closest('.btn-edit-product');
+      if (!btnTarget) {
         return;
       }
 
-      formProductWrapper.innerHTML += formProductTemplate(false);
+      void (async () => {
+        let target = event.target as HTMLElement;
+        if (!target) {
+          return;
+        }
+
+        if (target.closest('.btn-edit-product')) {
+          target = target.closest('.btn-edit-product') as HTMLElement;
+          const id = target.dataset['productId'] ?? '';
+          await handleShowEditForm(id);
+        }
+      })();
     });
   };
 
@@ -153,7 +183,10 @@ export default class ProductView {
     }
   };
 
-  bindProductAction(handleAddProduct: (product: Product) => Promise<void>) {
+  bindProductAction(
+    handleAddProduct: (product: Product) => Promise<void>,
+    handleEditProduct: (id: string, product: Product) => Promise<void>
+  ) {
     const formProductWrapperElement = document.getElementById(
       'form-product-wrapper'
     );
@@ -223,7 +256,7 @@ export default class ProductView {
         }
 
         if (productId) {
-          //   await handleEditProduct(productId, formData);
+          await handleEditProduct(productId, formData);
         } else {
           await handleAddProduct(formData);
         }

@@ -1,5 +1,6 @@
 import ProductModel from 'scripts/models/product';
-import { Product, ProductParams } from 'scripts/types/product';
+import { FilterParam } from 'scripts/types/params';
+import { Product } from 'scripts/types/product';
 import ProductView from 'scripts/views/product';
 
 export default class ProductController {
@@ -21,7 +22,7 @@ export default class ProductController {
   /**
    * Render the product list with default sorting and filtering parameters
    */
-  renderProducts = async (params: ProductParams = {}, products: Product[]) => {
+  renderProducts = async (params: FilterParam = {}, products: Product[]) => {
     // Default params is to show the newest product on the list
     if (!('sortBy' in params && 'order' in params)) {
       params.sortBy = 'id';
@@ -38,11 +39,11 @@ export default class ProductController {
     }
   };
 
-  handleFilterProducts = (params = {}) => {
-    this.renderProducts(params);
+  handleFilterProducts = async (params = {}) => {
+    await this.renderProducts(params, []);
   };
 
-  handleSortProducts = (params = {}) => {
-    this.renderProducts(params);
+  handleSortProducts = async (params = {}) => {
+    await this.renderProducts(params, []);
   };
 }

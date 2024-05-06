@@ -33,7 +33,7 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
         <label for="category">Category:</label>
         <div class="select-wrapper">
           <select id="category" name="category" data-field-name="category" class="form-input form-input-select">
-            ${statusOptionsHtml}
+            ${typeOptionsHtml}
           </select>
         </div>
       </div>
@@ -61,7 +61,7 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
         <label for="status">Status:</label>
         <div class="select-wrapper">
           <select id="status" name="status" data-field-name="status" class="form-input form-input-select">
-            ${typeOptionsHtml}
+            ${statusOptionsHtml}
           </select>
         </div>
       </div>

@@ -22,4 +22,36 @@ export default class ProductModel {
       params
     ));
   }
+
+  /**
+   * Adds a product then return the new products
+   */
+  async addProduct(product: Product) {
+    const data = await this.httpService.post<Product>(
+      PRODUCT_ENDPOINT,
+      product
+    );
+
+    this.products.unshift(data);
+
+    return this.products;
+  }
+
+  /**
+   * Edits a product then return the new products
+   */
+  async editProduct(id: string, product: Product) {
+    const data = await this.httpService.put<Product>(
+      `${PRODUCT_ENDPOINT}/${id}`,
+      product
+    );
+
+    if (data) {
+      this.products = this.products.map(item =>
+        item.id === id ? { ...item, ...product } : item
+      );
+    }
+
+    return this.products;
+  }
 }

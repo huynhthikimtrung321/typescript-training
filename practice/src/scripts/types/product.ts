@@ -13,8 +13,3 @@ export type Product = {
     | 'New arrival'
     | 'Low stock';
 };
-
-export type ProductParams = {
-  sortBy?: string;
-  order?: 'asc' | 'desc';
-};

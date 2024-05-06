@@ -16,7 +16,7 @@ export enum PRODUCT_STATUS {
   LOW_STOCK = 'Low stock',
 }
 
-export const PRODUCT_STATUS_CLASS = {
+export const PRODUCT_STATUS_CLASSES = {
   'Best-seller': 'best-seller-label',
   'Poor seller': 'poor-seller-label',
   'On sale': 'on-sale-label',

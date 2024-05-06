@@ -11,9 +11,9 @@ export default class ProductController {
     this.productModel = model;
   }
 
-  public initialize(): void {
+  public async initialize() {
     this.productView.initView();
-    this.renderProducts({}, []);
+    await this.renderProducts({}, []);
   }
 
   /**
@@ -30,7 +30,6 @@ export default class ProductController {
       this.productView.displayProducts(products, true);
       products = await this.productModel.getProducts(params);
     } catch (error) {
-      // showError({ text: GET_FAILED_MSG})
     } finally {
       this.productView.displayProducts(products, false);
     }

@@ -3,7 +3,7 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABELS, PRODUCT_STATUS_CLASS } from '../constants/labels';
+import { PRODUCT_LABELS, PRODUCT_STATUS_CLASSES } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import icon from '../../asset/images/icon.svg';
@@ -43,7 +43,7 @@ export default class ProductView {
       products.map(products => {
         const { id, name, category, sku, quantity, cost, price, status } =
           products;
-        const statusClass = PRODUCT_STATUS_CLASS[status];
+        const statusClass = PRODUCT_STATUS_CLASSES[status];
         const productRowElement = `
 				<li class="product-row product-item">
 					<h2 class="text-responsive">${name}</h2>

@@ -13,6 +13,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.2",
     "@eslint/js": "^9.1.1",
+    "@types/node": "^20.12.8",
+    "@types/toastify-js": "^1.12.3",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "axios": "^1.6.8",
@@ -31,6 +33,7 @@
     "typescript-eslint": "^7.7.1"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "toastify-js": "^1.12.0"
   }
 }

@@ -6,10 +6,5 @@ export type Product = {
   price: number;
   quantity: number;
   sku: string;
-  status:
-    | 'Best-seller'
-    | 'Poor seller'
-    | 'On sale'
-    | 'New arrival'
-    | 'Low stock';
+  status: 'bestSeller' | 'poorSeller' | 'onSale' | 'newArrival' | 'lowStock';
 };

@@ -1,8 +1,21 @@
-import { PRODUCT_STATUS, PRODUCT_TYPE } from 'scripts/constants/labels';
+import { PRODUCT_STATUS, PRODUCT_TYPE } from '@/constants/labels';
 
-export interface SelectOption {
-  label: PRODUCT_STATUS | PRODUCT_TYPE;
-  value: PRODUCT_STATUS | PRODUCT_TYPE | '';
+export interface SelectStatusOption {
+  label: PRODUCT_STATUS;
+  value:
+    | 'bestSeller'
+    | 'poorSeller'
+    | 'onSale'
+    | 'newArrival'
+    | 'lowStock'
+    | 'all';
+  selected: boolean;
+  classes?: string;
+}
+
+export interface SelectCategoryOption {
+  label: PRODUCT_TYPE;
+  value: PRODUCT_TYPE;
   selected: boolean;
   classes?: string;
 }

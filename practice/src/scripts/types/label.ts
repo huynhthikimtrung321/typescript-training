@@ -1,6 +1,6 @@
-export type LabelHtml = {
-  [key: string]: {
-    textContent: string;
-    className?: string;
-  };
+type Label = {
+  field: string;
+  label: string;
 };
+
+export type LabelHtml = Label[];

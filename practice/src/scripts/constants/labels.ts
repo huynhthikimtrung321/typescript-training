@@ -1,16 +1,12 @@
 import { LabelHtml } from 'scripts/types/label';
 
-const PRODUCT_STATUS_LABEL: ProductStatusLabel = {
+export const PRODUCT_STATUS_LABEL = {
   bestSeller: 'Best-seller',
   poorSeller: 'Poor seller',
   onSale: 'On sale',
   newArrival: 'New arrival',
   lowStock: 'Low stock',
 };
-
-interface ProductStatusLabel {
-  [key: PRODUCT_STATUS]: string;
-}
 
 export enum PRODUCT_TYPE {
   ALL_CATEGORY = 'All category',
@@ -27,14 +23,6 @@ export enum PRODUCT_STATUS {
   NEW_ARRIVAL = 'newArrival',
   LOW_STOCK = 'lowStock',
 }
-
-// export const PRODUCT_STATUS_CLASSES = {
-//   bestSeller: 'best-seller-label',
-//   poorSeller: 'poor-seller-label',
-//   onSale: 'on-sale-label',
-//   newArrival: 'new-arrival-label',
-//   lowStock: 'low-stock-label',
-// } as const;
 
 export const PRODUCT_LABELS: LabelHtml = [
   {

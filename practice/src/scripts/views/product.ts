@@ -3,7 +3,7 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABELS } from '../constants/labels';
+import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import icon from '../../asset/images/icon.svg';
@@ -51,7 +51,7 @@ export default class ProductView {
 					<p class="text-responsive">${quantity}</p>
 					<p class="text-responsive">${cost}</p>
 					<p class="text-responsive">${price}</p>
-					<p class="text-responsive label ${status}">${status}</p>
+					<p class="text-responsive label ${status}">${PRODUCT_STATUS_LABEL[status]}</p>
 					<div class="btn-actions-group">
 						<button class="btn-action btn-edit-product" data-product-id="${id}">
 							<svg width="20" height="20" fill="blue" viewBox="0 0 24 24">
@@ -79,6 +79,7 @@ export default class ProductView {
     mainContent.innerHTML += listItemHTML;
   }
 
+  //Render select HTML options based on `options` array.
   renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
@@ -91,6 +92,7 @@ export default class ProductView {
     }
   };
 
+  //Render a table header row based on `labelHtmls` array.
   renderTableHeader = (labelHtmls: LabelHtml) => {
     const tableHeaderElement = document.querySelector(
       '.product-row.product-header'

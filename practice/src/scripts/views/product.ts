@@ -1,4 +1,7 @@
-import { SelectOption } from 'scripts/types/selectOption';
+import {
+  SelectStatusOption,
+  SelectCategoryOption,
+} from 'scripts/types/selectOption';
 import {
   ProductStatusOptions,
   ProductTypeOptions,
@@ -20,7 +23,7 @@ export default class ProductView {
 
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
-    this.renderStatusSelectOptions('select-category', ProductTypeOptions);
+    this.renderCategorySelectOptions('select-category', ProductTypeOptions);
     this.renderTableHeader(PRODUCT_LABELS);
   };
 
@@ -81,15 +84,34 @@ export default class ProductView {
   }
 
   //Render select HTML options based on `options` array.
-  renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
+  renderStatusSelectOptions = (
+    elementId: string,
+    options: SelectStatusOption[]
+  ) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
-    options.forEach((option: SelectOption) => {
-      const optionElement = `<option value='${option.value}'>${option.label}</option>`;
+    options.forEach((option: SelectStatusOption) => {
+      const optionLabel = PRODUCT_STATUS_LABEL[option.value];
+      const optionElement = `<option value='${option.value}'>${optionLabel ? optionLabel : 'All Status'}</option>`;
       allOptions += optionElement;
     });
     if (statusSelect) {
       statusSelect.innerHTML = allOptions;
+    }
+  };
+
+  renderCategorySelectOptions = (
+    elementId: string,
+    options: SelectCategoryOption[]
+  ) => {
+    const categorySelect = document.getElementById(elementId);
+    let allOptions = '';
+    options.forEach((option: SelectCategoryOption) => {
+      const optionElement = `<option value='${option.value}'>${option.label}</option>`;
+      allOptions += optionElement;
+    });
+    if (categorySelect) {
+      categorySelect.innerHTML = allOptions;
     }
   };
 

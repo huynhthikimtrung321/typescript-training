@@ -6,10 +6,10 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '../constants/labels';
-import { LabelHtml } from '../types/label';
-import { Product } from '../types/product';
-import { FilterParam } from 'scripts/types/params';
+import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '@/constants/labels';
+import { LabelHtml } from '@/types/label';
+import { Product } from '@/types/product';
+import { FilterParam } from '@/types/params';
 import icon from '../../asset/images/icon.svg';
 
 export default class ProductView {

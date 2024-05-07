@@ -1,4 +1,4 @@
-import { LabelHtml } from 'scripts/types/label';
+import { LabelHtml } from '@/types/label';
 
 export const PRODUCT_STATUS_LABEL = {
   all: 'All Status',

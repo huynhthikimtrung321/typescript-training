@@ -1,4 +1,4 @@
-import { PRODUCT_STATUS, PRODUCT_TYPE } from 'scripts/constants/labels';
+import { PRODUCT_STATUS, PRODUCT_TYPE } from '@/constants/labels';
 
 export interface SelectStatusOption {
   label: PRODUCT_STATUS;

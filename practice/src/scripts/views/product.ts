@@ -3,7 +3,7 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABEL, PRODUCT_STATUS_CLASS } from '../constants/labels';
+import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '../constants/labels';
 import { LabelHtml } from '../types/label';
 import { Product } from '../types/product';
 import { FilterParam } from 'scripts/types/params';
@@ -21,7 +21,7 @@ export default class ProductView {
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
-    this.renderTableHeader(PRODUCT_LABEL);
+    this.renderTableHeader(PRODUCT_LABELS);
   };
 
   displayProducts(products: Product[], isLoading: boolean) {
@@ -44,7 +44,6 @@ export default class ProductView {
       products.map(products => {
         const { id, name, category, sku, quantity, cost, price, status } =
           products;
-        const statusClass = PRODUCT_STATUS_CLASS[status];
         const productRowElement = `
 				<li class="product-row product-item">
 					<h2 class="text-responsive">${name}</h2>
@@ -53,7 +52,7 @@ export default class ProductView {
 					<p class="text-responsive">${quantity}</p>
 					<p class="text-responsive">${cost}</p>
 					<p class="text-responsive">${price}</p>
-					<p class="text-responsive label ${statusClass}">${status}</p>
+					<p class="text-responsive label ${status}">${PRODUCT_STATUS_LABEL[status]}</p>
 					<div class="btn-actions-group">
 						<button class="btn-action btn-edit-product" data-product-id="${id}">
 							<svg width="20" height="20" fill="blue" viewBox="0 0 24 24">
@@ -81,6 +80,7 @@ export default class ProductView {
     mainContent.innerHTML += listItemHTML;
   }
 
+  //Render select HTML options based on `options` array.
   renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
@@ -93,13 +93,14 @@ export default class ProductView {
     }
   };
 
+  //Render a table header row based on `labelHtmls` array.
   renderTableHeader = (labelHtmls: LabelHtml) => {
     const tableHeaderElement = document.querySelector(
       '.product-row.product-header'
     );
     let headerHtml = ``;
-    for (const label in labelHtmls) {
-      const labelHtml = `<div data-field="${label}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
+    for (const label of labelHtmls) {
+      const labelHtml = `<div data-field="${label.field}" data-sort-label="true">${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {

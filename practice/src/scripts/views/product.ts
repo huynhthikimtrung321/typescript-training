@@ -1,12 +1,15 @@
-import { SelectOption } from 'scripts/types/selectOption';
+import {
+  SelectStatusOption,
+  SelectCategoryOption,
+} from 'scripts/types/selectOption';
 import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABEL, PRODUCT_STATUS_CLASS } from '../constants/labels';
-import { LabelHtml } from '../types/label';
-import { Product } from '../types/product';
-import { FilterParam } from 'scripts/types/params';
+import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '@/constants/labels';
+import { LabelHtml } from '@/types/label';
+import { Product } from '@/types/product';
+import { FilterParam } from '@/types/params';
 import icon from '../../asset/images/icon.svg';
 import { formProductTemplate } from './template/formProduct';
 import { toggleSpinner } from './loading/renderSpinner';
@@ -42,7 +45,7 @@ export default class ProductView {
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
     this.renderStatusSelectOptions('select-category', ProductTypeOptions);
-    this.renderTableHeader(PRODUCT_LABEL);
+    this.renderTableHeader(PRODUCT_LABELS);
     this.bindToggleFormProduct();
   };
 
@@ -76,7 +79,6 @@ export default class ProductView {
       products.map(products => {
         const { id, name, category, sku, quantity, cost, price, status } =
           products;
-        const statusClass = PRODUCT_STATUS_CLASS[status];
         const productRowElement = `
 				<li class="product-row product-item" data-field="name" data-sort-label="true">
 					<h2 class="text-responsive">${name}</h2>
@@ -85,7 +87,7 @@ export default class ProductView {
 					<p class="text-responsive">${quantity}</p>
 					<p class="text-responsive">${cost}</p>
 					<p class="text-responsive">${price}</p>
-					<p class="text-responsive label ${statusClass}">${status}</p>
+					<p class="text-responsive label ${status}">${PRODUCT_STATUS_LABEL[status]}</p>
 					<div class="btn-actions-group">
 						<button class="btn-action btn-edit-product" data-product-id="${id}">
 							<svg width="20" height="20" fill="blue" viewBox="0 0 24 24">
@@ -113,11 +115,16 @@ export default class ProductView {
     mainContent.innerHTML += listItemHTML;
   }
 
-  renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
+  //Render select HTML options based on `options` array.
+  renderStatusSelectOptions = (
+    elementId: string,
+    options: SelectStatusOption[]
+  ) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
-    options.forEach((option: SelectOption) => {
-      const optionElement = `<option value='${option.value}'>${option.label}</option>`;
+    options.forEach((option: SelectStatusOption) => {
+      const optionLabel = PRODUCT_STATUS_LABEL[option.value];
+      const optionElement = `<option value='${option.value}'>${optionLabel ? optionLabel : 'All Status'}</option>`;
       allOptions += optionElement;
     });
     if (statusSelect) {
@@ -139,13 +146,29 @@ export default class ProductView {
     });
   };
 
+  renderCategorySelectOptions = (
+    elementId: string,
+    options: SelectCategoryOption[]
+  ) => {
+    const categorySelect = document.getElementById(elementId);
+    let allOptions = '';
+    options.forEach((option: SelectCategoryOption) => {
+      const optionElement = `<option value='${option.value}'>${option.label}</option>`;
+      allOptions += optionElement;
+    });
+    if (categorySelect) {
+      categorySelect.innerHTML = allOptions;
+    }
+  };
+
+  //Render a table header row based on `labelHtmls` array.
   renderTableHeader = (labelHtmls: LabelHtml) => {
     const tableHeaderElement = document.querySelector(
       '.product-row.product-header'
     );
     let headerHtml = ``;
-    for (const label in labelHtmls) {
-      const labelHtml = `<div data-field="${label}" class="${label !== 'action' ? 'arrow-down-up' : ''}" data-sort-label="true">${labelHtmls[label]?.textContent}</div>`;
+    for (const label of labelHtmls) {
+      const labelHtml = `<div data-field="${label.field}" data-sort-label="true">${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {
@@ -247,7 +270,7 @@ export default class ProductView {
     const mainContent = document.querySelector('.main-content') as HTMLElement;
     if (!mainContent) return;
 
-    const filterParams: FilterParam = {};
+    let filterParams: FilterParam = {};
 
     mainContent.addEventListener('keyup', (event: KeyboardEvent) => {
       void (async () => {
@@ -278,6 +301,13 @@ export default class ProductView {
 
         await renderProducts(filterParams, []);
       })();
+    });
+
+    mainContent.addEventListener('click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      if (!target.classList.contains('btn-reset')) return;
+      filterParams = {};
+      renderProducts({});
     });
   };
 

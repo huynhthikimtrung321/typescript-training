@@ -47,7 +47,6 @@ export default class ProductController {
       this.productView.displayProducts(products, true);
       products = await this.productModel.getProducts(params);
     } catch (error) {
-      // showError({ text: GET_FAILED_MSG})
     } finally {
       this.productView.displayProducts(products, false);
     }

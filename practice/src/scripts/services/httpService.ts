@@ -1,11 +1,11 @@
-import axios, { Axios } from 'axios';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 
 export default class HttpService {
   private baseUrl: string;
   private axiosClient: Axios;
 
   constructor() {
-    this.baseUrl = process.env['BASE_API_URL'];
+    this.baseUrl = process.env['BASE_API_URL'] || '';
     this.axiosClient = axios.create({
       baseURL: this.baseUrl,
       headers: {
@@ -14,43 +14,38 @@ export default class HttpService {
     });
   }
 
-  async get<T>(endpoint: string, params = {}): Promise<T> {
-    const response = await this.axiosClient.get<T>(`${endpoint}`, { params });
-
-    if (response.status >= 200 && response.status <= 299) {
+  withApiErrorHandler = async <T>(
+    callBack: () => Promise<AxiosResponse<T>>
+  ) => {
+    try {
+      const response: AxiosResponse<T> = await callBack();
       return response.data;
-    } else {
-      throw new Error(`Get Failed: ${response.status}!`);
+    } catch (error: any) {
+      const axError = error as AxiosError;
+      if (!axError.response) {
+        throw new Error('Something went wrong. Please try again later.');
+      }
+      throw axError.message;
     }
+  };
+
+  async get<T>(endpoint: string, params = {}) {
+    return this.withApiErrorHandler<T>(() =>
+      this.axiosClient.get(`${endpoint}`, { params })
+    );
   }
 
-  async post<T>(endpoint: string, data: T): Promise<T> {
-    const response = await this.axiosClient.post<T>(endpoint, data);
-
-    if (response.status >= 200 && response.status <= 299) {
-      return response.data;
-    } else {
-      throw new Error(`Post Failed: ${response.status}!`);
-    }
+  async post<T>(endpoint: string, data: T) {
+    return this.withApiErrorHandler(() =>
+      this.axiosClient.post(endpoint, data)
+    );
   }
 
-  async put<T>(endpoint: string, data: T): Promise<T> {
-    const response = await this.axiosClient.put<T>(endpoint, data);
-
-    if (response.status >= 200 && response.status <= 299) {
-      return response.data;
-    } else {
-      throw new Error(`Put Failed: ${response.status}!`);
-    }
+  async put<T>(endpoint: string, data: T) {
+    return this.withApiErrorHandler(() => this.axiosClient.put(endpoint, data));
   }
 
-  async delete<T>(endpoint: string): Promise<T> {
-    const response = await this.axiosClient.delete<T>(endpoint);
-
-    if (response.status >= 200 && response.status <= 299) {
-      return response.data;
-    } else {
-      throw new Error(`Delete Failed: ${response.status}!`);
-    }
+  async delete(endpoint: string) {
+    return this.withApiErrorHandler(() => this.axiosClient.delete(endpoint));
   }
 }

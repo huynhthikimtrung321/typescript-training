@@ -44,7 +44,7 @@ export default class ProductView {
 
   initView = () => {
     this.renderStatusSelectOptions('select-status', ProductStatusOptions);
-    this.renderStatusSelectOptions('select-category', ProductTypeOptions);
+    this.renderCategorySelectOptions('select-category', ProductTypeOptions);
     this.renderTableHeader(PRODUCT_LABELS);
     this.bindToggleFormProduct();
   };

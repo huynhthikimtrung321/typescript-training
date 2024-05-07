@@ -1,5 +1,9 @@
 import { Product } from 'scripts/types/product';
-import { PRODUCT_STATUS, PRODUCT_TYPE } from 'scripts/constants/labels';
+import {
+  PRODUCT_STATUS,
+  PRODUCT_STATUS_LABEL,
+  PRODUCT_TYPE,
+} from 'scripts/constants/labels';
 
 export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   const {
@@ -16,7 +20,7 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   const typeOptionsHtml = Object.values(PRODUCT_TYPE)
     .map(item => `<option selected="${item === category}" >${item}</option>`)
     .join('');
-  const statusOptionsHtml = Object.values(PRODUCT_STATUS)
+  const statusOptionsHtml = Object.values(PRODUCT_STATUS_LABEL)
     .map(item => `<option selected="${item === status}" >${item}</option>`)
     .join('');
 

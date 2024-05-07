@@ -390,4 +390,36 @@ export default class ProductView {
       })();
     });
   }
+
+  bindDeleteProduct(
+    handleDeleteProduct: (id: string, product: Product) => Promise<void>
+  ) {
+    const mainContent = document.querySelector('.main-content') as HTMLElement;
+    const modalDeleteContainer = document.querySelector(
+      '.modal-delete-container'
+    ) as HTMLElement;
+
+    const btnDelete = document.querySelector('.btn-delete') as HTMLElement;
+    const btnCancel = document.querySelector('.btn-cancel') as HTMLElement;
+    let productId: string;
+
+    mainContent.addEventListener('click', (event: MouseEvent) => {
+      const target = (event.target as HTMLElement).closest(
+        '.btn-delete-product'
+      );
+      if (target) {
+        productId = (target as HTMLElement).dataset.productId || '';
+        modalDeleteContainer.classList.toggle('hidden');
+      }
+    });
+
+    btnCancel.addEventListener('click', () => {
+      modalDeleteContainer.classList.toggle('hidden');
+    });
+
+    btnDelete.addEventListener('click', () => {
+      modalDeleteContainer.classList.toggle('hidden');
+      handleDeleteProduct(productId);
+    });
+  }
 }

@@ -27,6 +27,7 @@ export default class ProductController {
       this.handleAddProduct,
       this.handleEditProduct
     );
+    this.productView.bindDeleteProduct(this.handleDeleteProduct);
     this.productView.bindRemoveModal();
   }
 
@@ -85,6 +86,21 @@ export default class ProductController {
       this.productView.removeSpinner();
       showSuccess({ text: EDIT_SUCCESS_MSG });
       this.productView.removeModal('form');
+      this.productView.displayProducts(products, false);
+    } catch (error) {
+      showError({ text: EDIT_FAILED_MSG });
+    }
+  };
+
+  /**
+   * Deletes a product and notify the end users
+   */
+  handleDeleteProduct = async (id: string) => {
+    try {
+      this.productView.displaySpinner();
+      const products = await this.productModel.deleteProducts(id);
+      this.productView.removeSpinner();
+      showSuccess({ text: EDIT_SUCCESS_MSG });
       this.productView.displayProducts(products, false);
     } catch (error) {
       showError({ text: EDIT_FAILED_MSG });

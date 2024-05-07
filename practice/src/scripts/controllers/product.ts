@@ -5,15 +5,7 @@ import ProductView from 'scripts/views/product';
 import { showError, showSuccess } from 'scripts/views/toast';
 import { NOTIFY_MESSAGES } from '../constants/message';
 
-const {
-  ADD_SUCCESS_MSG,
-  ADD_FAILED_MSG,
-  // EDIT_SUCCESS_MSG,
-  // EDIT_FAILED_MSG,
-  // DELETE_SUCCESS_MSG,
-  // DELETE_FAILED_MSG,
-  // GET_FAILED_MSG,
-} = NOTIFY_MESSAGES;
+const { ADD_SUCCESS_MSG, ADD_FAILED_MSG } = NOTIFY_MESSAGES;
 
 export default class ProductController {
   private productView: ProductView;

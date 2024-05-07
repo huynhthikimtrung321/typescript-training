@@ -24,10 +24,7 @@ export default class ProductModel {
    * Adds a product then return the new products
    */
   async addProduct(product: Product) {
-    const data = await this.httpService.post<Product>(
-      PRODUCT_ENDPOINT,
-      product
-    );
+    const data = await this.httpService.post<Product>(products, product);
 
     this.products.unshift(data);
 

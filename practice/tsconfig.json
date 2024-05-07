@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["DOM", "ES2017"],
     "target": "es6",
     "module": "commonjs",
     "outDir": "./dist",
@@ -23,7 +24,7 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "paths": {
-      "@constants/*": ["constants/*"],
+      "@constants/*": ["/scripts/constants/*"],
       "@controllers/*": ["controllers/*"],
       "@helpers/*": ["helpers/*"],
       "@models/*": ["models/*"],

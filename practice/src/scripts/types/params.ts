@@ -4,7 +4,7 @@ export type FilterParam = {
   category?: string;
 };
 
-export type SortParam = {
+export interface SortParam {
   sortBy?: string;
   order?: 'asc' | 'desc';
-};
+}

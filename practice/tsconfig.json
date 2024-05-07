@@ -24,12 +24,7 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "paths": {
-      "@constants/*": ["/scripts/constants/*"],
-      "@controllers/*": ["controllers/*"],
-      "@helpers/*": ["helpers/*"],
-      "@models/*": ["models/*"],
-      "@services/*": ["services/*"],
-      "@views/*": ["views/*"]
+      "@/*": ["./scripts/*"],
     }
   },
   "files": ["./globals.d.ts"],

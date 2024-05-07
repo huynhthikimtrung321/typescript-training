@@ -1,3 +1,14 @@
+import { LabelHtml } from '@/types/label';
+
+export const PRODUCT_STATUS_LABEL = {
+  all: 'All Status',
+  bestSeller: 'Best-seller',
+  poorSeller: 'Poor seller',
+  onSale: 'On sale',
+  newArrival: 'New arrival',
+  lowStock: 'Low stock',
+};
+
 export enum PRODUCT_TYPE {
   ALL_CATEGORY = 'All category',
   SKIN_CARE = 'Skin care',
@@ -6,45 +17,45 @@ export enum PRODUCT_TYPE {
 }
 
 export enum PRODUCT_STATUS {
-  ALL_STATUS = 'All status',
-  BEST_SELLER = 'Best-seller',
-  POOR_SELLER = 'Poor seller',
-  ON_SALE = 'On sale',
-  NEW_ARRIVAL = 'New arrival',
-  LOW_STOCK = 'Low stock',
+  ALL_STATUS = '',
+  BEST_SELLER = 'bestSeller',
+  POOR_SELLER = 'poorSeller',
+  ON_SALE = 'onSale',
+  NEW_ARRIVAL = 'newArrival',
+  LOW_STOCK = 'lowStock',
 }
 
-export const PRODUCT_STATUS_CLASS = {
-  'Best-seller': 'best-seller-label',
-  'Poor seller': 'poor-seller-label',
-  'On sale': 'on-sale-label',
-  'New arrival': 'new-arrival-label',
-  'Low stock': 'low-stock-label',
-};
-
-export const PRODUCT_LABEL = {
-  name: {
-    textContent: 'Product name',
+export const PRODUCT_LABELS: LabelHtml = [
+  {
+    field: 'name',
+    label: 'Product name',
   },
-  category: {
-    textContent: 'Category',
+  {
+    field: 'category',
+    label: 'Category',
   },
-  SKU: {
-    textContent: 'SKU',
+  {
+    field: 'sku',
+    label: 'SKU',
   },
-  Quantity: {
-    textContent: 'Quantity',
+  {
+    field: 'quantity',
+    label: 'Quantity',
   },
-  Cost: {
-    textContent: 'Cost',
+  {
+    field: 'cost',
+    label: 'Cost',
   },
-  price: {
-    textContent: 'Price',
+  {
+    field: 'price',
+    label: 'Price',
   },
-  status: {
-    textContent: 'Status',
+  {
+    field: 'status',
+    label: 'Status',
   },
-  action: {
-    textContent: 'Action',
+  {
+    field: 'action',
+    label: 'Action',
   },
-};
+];

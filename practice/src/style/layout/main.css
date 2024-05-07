@@ -82,23 +82,23 @@
   color: #222222;
 }
 
-.best-seller-label {
+.bestSeller {
   background: #d4f8d3;
 }
 
-.poor-seller-label {
+.poorSeller {
   background: #f8f4d3;
 }
 
-.on-sale-label {
+.onSale {
   background: #ede7fb;
 }
 
-.new-arrival-label {
+.newArrival {
   background-color: #f5e5e2;
 }
 
-.low-stock-label {
+.lowStock {
   background-color: #da8a7bd6;
 }
 

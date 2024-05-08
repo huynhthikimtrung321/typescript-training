@@ -5,8 +5,14 @@ import ProductView from 'scripts/views/product';
 import { showError, showSuccess } from 'scripts/views/toast';
 import { NOTIFY_MESSAGES } from '../constants/message';
 
-const { ADD_SUCCESS_MSG, ADD_FAILED_MSG, EDIT_SUCCESS_MSG, EDIT_FAILED_MSG } =
-  NOTIFY_MESSAGES;
+const {
+  ADD_SUCCESS_MSG,
+  ADD_FAILED_MSG,
+  EDIT_SUCCESS_MSG,
+  EDIT_FAILED_MSG,
+  DELETE_SUCCESS_MSG,
+  DELETE_FAILED_MSG,
+} = NOTIFY_MESSAGES;
 
 export default class ProductController {
   private productView: ProductView;
@@ -100,10 +106,10 @@ export default class ProductController {
       this.productView.displaySpinner();
       const products = await this.productModel.deleteProducts(id);
       this.productView.removeSpinner();
-      showSuccess({ text: EDIT_SUCCESS_MSG });
+      showSuccess({ text: DELETE_SUCCESS_MSG });
       this.productView.displayProducts(products, false);
     } catch (error) {
-      showError({ text: EDIT_FAILED_MSG });
+      showError({ text: DELETE_FAILED_MSG });
     }
   };
 

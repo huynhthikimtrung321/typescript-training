@@ -18,10 +18,10 @@ export const ValidationErrors = {
   getNotIntegerError: (): string => 'This field should only contain integer',
   getNotPositiveError: (): string =>
     'This field should only contain positive number',
-  getNotGreaterError: (target: string): string =>
-    `This field must be greater than ${target}!`,
-  getNotLesserError: (target: string): string =>
-    `This field must be lesser than ${target}!`,
+  getNotGreaterError: (targetField: string): string =>
+    `This field must be greater than ${targetField}!`,
+  getNotLesserError: (targetField: string): string =>
+    `This field must be lesser than ${targetField}!`,
   getNotEnoughCharacterError: (min: number): string =>
     `This field should have at least ${min} characters`,
 };

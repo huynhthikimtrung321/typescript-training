@@ -3,8 +3,10 @@ import {
   ProductStatusOptions,
   ProductTypeOptions,
 } from '../constants/selectOption';
-import { PRODUCT_LABELS } from '../constants/labels';
+import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '../constants/labels';
 import { LabelHtml } from '../types/label';
+import { Product } from '../types/product';
+import icon from '../../asset/images/icon.svg';
 
 export default class ProductView {
   constructor(mainContentSelector: string) {
@@ -21,6 +23,63 @@ export default class ProductView {
     this.renderTableHeader(PRODUCT_LABELS);
   };
 
+  displayProducts(products: Product[], isLoading: boolean) {
+    const mainContent = document.getElementById('product-list');
+    if (!mainContent) {
+      return; // this line should show error
+    }
+    mainContent.innerHTML = '';
+
+    let listItemHTML = '<ul class="table-header">';
+
+    if (isLoading) {
+      listItemHTML += '<span class="spinner"></span>';
+      listItemHTML += '</ul>';
+    } else if (!products) {
+      listItemHTML +=
+        '<p class="text-large text-center">No products at this moment.</p>';
+      listItemHTML += '</ul>';
+    } else {
+      products.map(products => {
+        const { id, name, category, sku, quantity, cost, price, status } =
+          products;
+        const productRowElement = `
+				<li class="product-row product-item">
+					<h2 class="text-responsive">${name}</h2>
+					<p class="text-responsive">${category}</p>
+					<p class="text-responsive">${sku}</p>
+					<p class="text-responsive">${quantity}</p>
+					<p class="text-responsive">${cost}</p>
+					<p class="text-responsive">${price}</p>
+					<p class="text-responsive label ${status}">${PRODUCT_STATUS_LABEL[status]}</p>
+					<div class="btn-actions-group">
+						<button class="btn-action btn-edit-product" data-product-id="${id}">
+							<svg width="20" height="20" fill="blue" viewBox="0 0 24 24">
+								<use
+									xlink:href="${icon}#pen-icon"
+								></use>
+							</svg>
+						</button>
+						<button class="btn-action btn-delete-product" data-product-id="${id}">
+							<svg width="20 " height="20" fill="red" viewBox="0 0 41.336 41.336">
+								<use
+									xlink:href="${icon}#trash-can"
+								></use>
+							</svg>
+						</button>
+					</div>
+				</li>
+			`;
+
+        listItemHTML += productRowElement;
+      });
+      listItemHTML += '</ul>';
+    }
+
+    mainContent.innerHTML += listItemHTML;
+  }
+
+  //Render select HTML options based on `options` array.
   renderStatusSelectOptions = (elementId: string, options: SelectOption[]) => {
     const statusSelect = document.getElementById(elementId);
     let allOptions = '';
@@ -33,6 +92,7 @@ export default class ProductView {
     }
   };
 
+  //Render a table header row based on `labelHtmls` array.
   renderTableHeader = (labelHtmls: LabelHtml) => {
     const tableHeaderElement = document.querySelector(
       '.product-row.product-header'

@@ -106,7 +106,6 @@ export default class ProductView {
 					</div>
 				</li>
 			`;
-
         listItemHTML += productRowElement;
       });
       listItemHTML += '</ul>';

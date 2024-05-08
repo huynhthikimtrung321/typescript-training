@@ -244,10 +244,20 @@ export default class ProductView {
           }
         }
 
+        const product: Product = {
+          name: formData.get('name') as string,
+          sku: formData.get('sku') as string,
+          quantity: parseInt(formData.get('quantity') as string),
+          price: parseFloat(formData.get('price') as string),
+          cost: parseFloat(formData.get('cost') as string),
+          category: formData.get('category'),
+          status: formData.get('status'),
+        };
+
         if (productId) {
-          //   await handleEditProduct(productId, formData);
+          //   await handleEditProduct(productId, product);
         } else {
-          await handleAddProduct(formData);
+          await handleAddProduct(product);
         }
       })();
     });

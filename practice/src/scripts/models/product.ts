@@ -13,11 +13,19 @@ export default class ProductModel {
     this.products = [];
   }
 
+  processProduct = (product: any) => {
+    product.quantity = parseInt(product.quantity);
+    product.price = parseFloat(product.price);
+    product.cost = parseFloat(product.cost);
+  };
+
   /**
    * Fetchs products by params
    */
   async getProducts(params = {}) {
-    return (this.products = await this.httpService.get(products, params));
+    this.products = await this.httpService.get(products, params);
+
+    return this.products;
   }
 
   /**

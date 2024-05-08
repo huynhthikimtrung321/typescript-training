@@ -141,7 +141,7 @@ export default class ProductView {
     );
     let headerHtml = ``;
     for (const label of labelHtmls) {
-      const labelHtml = `<div data-field="${label.field}" data-sort-label="true" class="arrow-down-up">${label.label}</div>`;
+      const labelHtml = `<div data-field="${label.field}" data-sort-label="true" ${label.label !== 'Action' ? `class="arrow-down-up"` : ''}>${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {
@@ -197,6 +197,7 @@ export default class ProductView {
 
       const targetField = target.dataset['field'];
       if (!targetField) return;
+      if (targetField === 'action') return;
 
       // Gets all labels and remove their arrows except the target
       if (target.parentNode !== null) {

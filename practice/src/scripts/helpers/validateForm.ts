@@ -2,14 +2,14 @@ import { FormFieldName } from 'scripts/types/form';
 import { ValidationErrors } from '../constants/message';
 import REGEX from '../constants/regex';
 
-type Target = {
+type FieldValidator = {
   field: string;
   value: string;
 };
 
-type Validator = (value: string, target?: Target) => string;
+type Validator = (value: string, target?: FieldValidator) => string;
 
-type Field =
+type ProductField =
   | 'name'
   | 'price'
   | 'sku'
@@ -19,7 +19,7 @@ type Field =
   | 'category';
 
 export type FormError = {
-  [key in Field]?: string;
+  [key in ProductField]?: string;
 };
 
 export type FormField = {
@@ -47,11 +47,11 @@ const isAllowedString = (value: string) =>
   allowedStringRegex.test(value) ? '' : getUnallowedStringError();
 const hasMinLength = (value: string) =>
   value.length >= 5 ? '' : getNotEnoughCharacterError(5);
-const isGreaterOrEqual = (value: string, target: Target) =>
+const isGreaterOrEqual = (value: string, target: FieldValidator) =>
   parseFloat(value) >= parseFloat(target.value)
     ? ''
     : getNotGreaterError(target.field);
-const isLesserOrEqual = (value: string, target: Target) =>
+const isLesserOrEqual = (value: string, target: FieldValidator) =>
   parseFloat(value) <= parseFloat(target.value)
     ? ''
     : getNotLesserError(target.field);
@@ -91,7 +91,7 @@ const renderErrorMessages = (
   errorMsgElements.forEach(element => {
     const field = element.dataset['fieldError'];
     if (field) {
-      element.textContent = formError[field as Field] ?? '';
+      element.textContent = formError[field as ProductField] ?? '';
     }
   });
 };

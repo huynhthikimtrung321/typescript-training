@@ -1,6 +1,7 @@
-import { LabelHtml } from 'scripts/types/label';
+import { LabelHtml } from '@/types/label';
 
 export const PRODUCT_STATUS_LABEL = {
+  all: 'All Status',
   bestSeller: 'Best-seller',
   poorSeller: 'Poor seller',
   onSale: 'On sale',
@@ -16,7 +17,7 @@ export enum PRODUCT_TYPE {
 }
 
 export enum PRODUCT_STATUS {
-  ALL_STATUS = 'All status',
+  ALL_STATUS = '',
   BEST_SELLER = 'bestSeller',
   POOR_SELLER = 'poorSeller',
   ON_SALE = 'onSale',

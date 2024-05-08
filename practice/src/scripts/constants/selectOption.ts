@@ -1,7 +1,10 @@
-import { SelectOption } from 'scripts/types/selectOption';
+import {
+  SelectStatusOption,
+  SelectCategoryOption,
+} from 'scripts/types/selectOption';
 import { PRODUCT_STATUS, PRODUCT_TYPE } from './labels';
 
-export const ProductStatusOptions: SelectOption[] = [
+export const ProductStatusOptions: SelectStatusOption[] = [
   {
     label: PRODUCT_STATUS.ALL_STATUS,
     value: PRODUCT_STATUS.ALL_STATUS,
@@ -35,10 +38,10 @@ export const ProductStatusOptions: SelectOption[] = [
   },
 ];
 
-export const ProductTypeOptions: SelectOption[] = [
+export const ProductTypeOptions: SelectCategoryOption[] = [
   {
     label: PRODUCT_TYPE.ALL_CATEGORY,
-    value: PRODUCT_TYPE.ALL_CATEGORY,
+    value: '',
     selected: true,
     classes: 'product-status-option',
   },

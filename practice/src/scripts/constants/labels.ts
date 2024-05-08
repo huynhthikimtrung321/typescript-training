@@ -1,6 +1,10 @@
 import { LabelHtml } from '@/types/label';
 
-export const PRODUCT_STATUS_LABEL = {
+interface ProductStatusLabel {
+  [key: string]: string;
+}
+
+export const PRODUCT_STATUS_LABEL: ProductStatusLabel = {
   all: 'All Status',
   bestSeller: 'Best-seller',
   poorSeller: 'Poor seller',

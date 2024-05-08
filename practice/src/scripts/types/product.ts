@@ -1,4 +1,4 @@
-export type Product = {
+export interface Product {
   id: string;
   category: 'Skin care' | 'Face care' | 'Lips care';
   cost: number;
@@ -7,4 +7,4 @@ export type Product = {
   quantity: number;
   sku: string;
   status: 'bestSeller' | 'poorSeller' | 'onSale' | 'newArrival' | 'lowStock';
-};
+}

@@ -33,6 +33,7 @@
     "typescript-eslint": "^7.7.1"
   },
   "dependencies": {
+    "@parcel/watcher-linux-x64-glibc": "^2.4.1",
     "buffer": "^6.0.3",
     "toastify-js": "^1.12.0"
   }

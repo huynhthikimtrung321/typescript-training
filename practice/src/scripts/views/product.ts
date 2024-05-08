@@ -53,7 +53,7 @@ export default class ProductView {
         const { id, name, category, sku, quantity, cost, price, status } =
           products;
         const productRowElement = `
-				<li class="product-row product-item" data-field="name" data-sort-label="true">
+				<li class="product-row product-item" data-field="name" data-sort-label="true" >
 					<h2 class="text-responsive">${name}</h2>
 					<p class="text-responsive">${category}</p>
 					<p class="text-responsive">${sku}</p>
@@ -141,7 +141,7 @@ export default class ProductView {
     );
     let headerHtml = ``;
     for (const label of labelHtmls) {
-      const labelHtml = `<div data-field="${label.field}" data-sort-label="true">${label.label}</div>`;
+      const labelHtml = `<div data-field="${label.field}" data-sort-label="true" class="arrow-down-up">${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {

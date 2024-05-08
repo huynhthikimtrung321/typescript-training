@@ -289,7 +289,7 @@ export default class ProductView {
         };
 
         if (productId) {
-          //   await handleEditProduct(productId, product);
+          await handleEditProduct(productId, product);
         } else {
           await handleAddProduct(product);
         }

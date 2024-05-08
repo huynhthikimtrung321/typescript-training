@@ -5,7 +5,7 @@ export default class HttpService {
   private axiosClient: Axios;
 
   constructor() {
-    this.baseUrl = process.env['BASE_API_URL'] || '';
+    this.baseUrl = process.env['BASE_API_URL'] ?? '';
     this.axiosClient = axios.create({
       baseURL: this.baseUrl,
       headers: {
@@ -35,7 +35,7 @@ export default class HttpService {
     );
   }
 
-  async post<T>(endpoint: string, data: T) {
+  async post<T>(endpoint: string, data: T): Promise<T> {
     return this.withApiErrorHandler(() =>
       this.axiosClient.post(endpoint, data)
     );

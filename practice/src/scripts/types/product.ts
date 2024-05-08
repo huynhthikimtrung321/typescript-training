@@ -8,8 +8,3 @@ export interface Product {
   sku: string;
   status: 'bestSeller' | 'poorSeller' | 'onSale' | 'newArrival' | 'lowStock';
 }
-
-export type ProductParams = {
-  sortBy?: string;
-  order?: 'asc' | 'desc';
-};

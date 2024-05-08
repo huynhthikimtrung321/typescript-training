@@ -1,5 +1,9 @@
 import { Product } from 'scripts/types/product';
-import { PRODUCT_STATUS, PRODUCT_TYPE } from 'scripts/constants/labels';
+import {
+  PRODUCT_STATUS,
+  PRODUCT_STATUS_LABEL,
+  PRODUCT_TYPE,
+} from 'scripts/constants/labels';
 
 export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   const {
@@ -16,9 +20,11 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   const typeOptionsHtml = Object.values(PRODUCT_TYPE)
     .map(item => `<option selected="${item === category}" >${item}</option>`)
     .join('');
-  const statusOptionsHtml = Object.values(PRODUCT_STATUS)
-    .map(item => `<option selected="${item === status}" >${item}</option>`)
-    .join('');
+  let statusOptionsHtml = '';
+  for (const statusLabel in PRODUCT_STATUS_LABEL) {
+    const value = PRODUCT_STATUS_LABEL[statusLabel];
+    statusOptionsHtml += `<option selected="${status === statusLabel}" value="${statusLabel}" >${value}</option>`;
+  }
 
   return `
   <div class="modal-overlay">

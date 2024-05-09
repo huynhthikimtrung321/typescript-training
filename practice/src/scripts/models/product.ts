@@ -29,6 +29,13 @@ export default class ProductModel {
   }
 
   /**
+   * Gets product by its id
+   */
+  async getProduct(id: string) {
+    return await this.httpService.get<Product>(`${products}/${id}`);
+  }
+
+  /**
    * Adds a product then return the new products
    */
   async addProduct(product: Product) {
@@ -43,14 +50,14 @@ export default class ProductModel {
    * Edits a product then return the new products
    */
   async editProduct(id: string, product: Product) {
-    const data = await this.httpService.put<Product>(
-      `${PRODUCT_ENDPOINT}/${id}`,
+    const data = (await this.httpService.put<Product>(
+      `${products}/${id}`,
       product
-    );
+    )) as Product;
 
     if (data) {
       this.products = this.products.map(item =>
-        item.id === id ? { ...item, ...product } : item
+        item.id === id ? { ...item, ...data } : item
       );
     }
 

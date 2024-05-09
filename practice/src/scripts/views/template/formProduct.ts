@@ -1,8 +1,9 @@
 import { Product } from 'scripts/types/product';
 import {
-  PRODUCT_STATUS,
   PRODUCT_STATUS_LABEL,
+  PRODUCT_STATUS_OPTIONS,
   PRODUCT_TYPE,
+  PRODUCT_TYPE_OPTIONS,
 } from 'scripts/constants/labels';
 
 export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
@@ -27,7 +28,7 @@ export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   }
 
   return `
-  <div class="modal-overlay">
+  <div class="modal-overlay modal-overlay-form">
     <form action="javascript:void(0)" method="post" class="form-container">
       <h2 class="modal-form-title">${isEditForm ? 'Edit Product' : 'Add Product'}</h2>
       <div class="form-group">

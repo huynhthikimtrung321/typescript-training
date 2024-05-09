@@ -20,6 +20,21 @@ export enum PRODUCT_TYPE {
   LIPS_CARE = 'Lips care',
 }
 
+export const PRODUCT_TYPE_OPTIONS = [
+  {
+    label: 'Skin care',
+    value: 'skinCare',
+  },
+  {
+    label: 'Face care',
+    value: 'faceCare',
+  },
+  {
+    label: 'Lips care',
+    value: 'lipsCare',
+  },
+];
+
 export enum PRODUCT_STATUS {
   ALL_STATUS = '',
   BEST_SELLER = 'bestSeller',
@@ -28,6 +43,29 @@ export enum PRODUCT_STATUS {
   NEW_ARRIVAL = 'newArrival',
   LOW_STOCK = 'lowStock',
 }
+
+export const PRODUCT_STATUS_OPTIONS = [
+  {
+    label: 'Best Seller',
+    value: 'bestSeller',
+  },
+  {
+    label: 'Poor seller',
+    value: 'poorSeller',
+  },
+  {
+    label: 'On Sale',
+    value: 'onSale',
+  },
+  {
+    label: 'New Arrival',
+    value: 'newArrival',
+  },
+  {
+    label: 'Low Stock',
+    value: 'lowStock',
+  },
+];
 
 export const PRODUCT_LABELS: LabelHtml = [
   {

@@ -401,10 +401,18 @@ export default class ProductView {
     });
   }
 
-  bindDeleteProduct(
-    handleDeleteProduct: (id: string, product: Product) => Promise<void>
-  ) {
-    const mainContent = document.querySelector('.main-content') as HTMLElement;
+  bindRemoveModalDelete() {
+    const modalDelete = document.querySelector(
+      '.modal-delete-container'
+    ) as HTMLElement;
+    modalDelete.addEventListener('mousedown', event => {
+      if (event.target === modalDelete) {
+        modalDelete.classList.add('hidden');
+      }
+    });
+  }
+
+  bindDeleteProduct(handleDeleteProduct: (id: string) => void) {
     const modalDeleteContainer = document.querySelector(
       '.modal-delete-container'
     ) as HTMLElement;
@@ -413,12 +421,11 @@ export default class ProductView {
     const btnCancel = document.querySelector('.btn-cancel') as HTMLElement;
     let productId: string;
 
-    mainContent.addEventListener('click', (event: MouseEvent) => {
-      const target = (event.target as HTMLElement).closest(
-        '.btn-delete-product'
-      );
-      if (target) {
-        productId = (target as HTMLElement).dataset.productId || '';
+    document.addEventListener('click', event => {
+      const target = event.target as HTMLElement;
+      const btnTarget = target.closest('.btn-delete-product') as HTMLElement;
+      if (btnTarget) {
+        productId = btnTarget.dataset['productId'] ?? '';
         modalDeleteContainer.classList.toggle('hidden');
       }
     });

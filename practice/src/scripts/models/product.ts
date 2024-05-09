@@ -5,6 +5,9 @@ import { Product } from 'scripts/types/product';
 const { products } = API_ENDPOINT;
 
 export default class ProductModel {
+  deleteProduct(id: string) {
+    throw new Error('Method not implemented.');
+  }
   private httpService: HttpService;
   private products: Product[];
 
@@ -59,6 +62,17 @@ export default class ProductModel {
       this.products = this.products.map(item =>
         item.id === id ? { ...item, ...data } : item
       );
+    }
+
+    return this.products;
+  }
+  async deleteProducts(id: string) {
+    const data = (await this.httpService.delete<Product>(
+      `${products}/${id}`
+    )) as Product;
+
+    if (data) {
+      this.products = this.products.filter(item => item.id !== id);
     }
 
     return this.products;

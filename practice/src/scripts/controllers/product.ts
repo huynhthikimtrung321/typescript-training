@@ -35,6 +35,7 @@ export default class ProductController {
     );
     this.productView.bindDeleteProduct(this.handleDeleteProduct);
     this.productView.bindRemoveModal();
+    this.productView.bindRemoveModalDelete();
   }
 
   /**

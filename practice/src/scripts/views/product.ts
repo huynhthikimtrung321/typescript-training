@@ -124,9 +124,9 @@ export default class ProductView {
     }
 
     if (isEditForm) {
-      formProductWrapper.innerHTML += formProductTemplate(true, product);
+      formProductWrapper.innerHTML = formProductTemplate(true, product);
     } else {
-      formProductWrapper.innerHTML += formProductTemplate(false);
+      formProductWrapper.innerHTML = formProductTemplate(false);
     }
   }
 

@@ -664,7 +664,7 @@ class ProductView {
             const tableHeaderElement = document.querySelector(".product-row.product-header");
             let headerHtml = ``;
             for (const label of labelHtmls){
-                const labelHtml = `<div data-field="${label.field}" data-sort-label="true">${label.label}</div>`;
+                const labelHtml = `<div data-field="${label.field}" data-sort-label="true" ${label.label !== "Action" ? `class="arrow-down-up"` : ""}>${label.label}</div>`;
                 headerHtml += labelHtml;
             }
             if (tableHeaderElement) tableHeaderElement.innerHTML += headerHtml;
@@ -723,7 +723,7 @@ class ProductView {
             products.map((products)=>{
                 const { id, name, category, sku, quantity, cost, price, status } = products;
                 const productRowElement = `
-				<li class="product-row product-item" data-field="name" data-sort-label="true">
+				<li class="product-row product-item" data-field="name" data-sort-label="true" >
 					<h2 class="text-responsive">${name}</h2>
 					<p class="text-responsive">${category}</p>
 					<p class="text-responsive">${sku}</p>
@@ -856,6 +856,7 @@ class ProductView {
                 if (!target.dataset["sortLabel"]) return;
                 const targetField = target.dataset["field"];
                 if (!targetField) return;
+                if (targetField === "action") return;
                 // Gets all labels and remove their arrows except the target
                 if (target.parentNode !== null) {
                     const targetSiblings = Array.from(target.parentNode.children);
@@ -886,6 +887,33 @@ class ProductView {
                     await handleSortProducts({}); // Assume reset to default sort
                 }
             })();
+        });
+    }
+    bindRemoveModalDelete() {
+        const modalDelete = document.querySelector(".modal-delete-container");
+        modalDelete.addEventListener("mousedown", (event)=>{
+            if (event.target === modalDelete) modalDelete.classList.add("hidden");
+        });
+    }
+    bindDeleteProduct(handleDeleteProduct) {
+        const modalDeleteContainer = document.querySelector(".modal-delete-container");
+        const btnDelete = document.querySelector(".btn-delete");
+        const btnCancel = document.querySelector(".btn-cancel");
+        let productId;
+        document.addEventListener("click", (event)=>{
+            const target = event.target;
+            const btnTarget = target.closest(".btn-delete-product");
+            if (btnTarget) {
+                productId = btnTarget.dataset["productId"] ?? "";
+                modalDeleteContainer.classList.toggle("hidden");
+            }
+        });
+        btnCancel.addEventListener("click", ()=>{
+            modalDeleteContainer.classList.toggle("hidden");
+        });
+        btnDelete.addEventListener("click", ()=>{
+            modalDeleteContainer.classList.toggle("hidden");
+            handleDeleteProduct(productId);
         });
     }
 }
@@ -1288,7 +1316,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _toast = require("scripts/views/toast");
 var _message = require("../constants/message");
-const { ADD_SUCCESS_MSG, ADD_FAILED_MSG, EDIT_SUCCESS_MSG, EDIT_FAILED_MSG } = (0, _message.NOTIFY_MESSAGES);
+const { ADD_SUCCESS_MSG, ADD_FAILED_MSG, EDIT_SUCCESS_MSG, EDIT_FAILED_MSG, DELETE_SUCCESS_MSG, DELETE_FAILED_MSG } = (0, _message.NOTIFY_MESSAGES);
 class ProductController {
     constructor(view, model){
         /**
@@ -1350,6 +1378,23 @@ class ProductController {
                 });
             }
         };
+        /**
+   * Deletes a product and notify the end users
+   */ this.handleDeleteProduct = async (id)=>{
+            try {
+                this.productView.displaySpinner();
+                const products = await this.productModel.deleteProducts(id);
+                this.productView.removeSpinner();
+                (0, _toast.showSuccess)({
+                    text: DELETE_SUCCESS_MSG
+                });
+                this.productView.displayProducts(products, false);
+            } catch (error) {
+                (0, _toast.showError)({
+                    text: DELETE_FAILED_MSG
+                });
+            }
+        };
         this.handleFilterProducts = async (params = {})=>{
             await this.renderProducts(params, []);
         };
@@ -1366,6 +1411,7 @@ class ProductController {
         this.productView.bindSortProduct(this.handleSortProducts);
         this.productView.bindToggleFormProduct(this.handleShowEditForm);
         this.productView.bindProductAction(this.handleAddProduct, this.handleEditProduct);
+        this.productView.bindDeleteProduct(this.handleDeleteProduct);
         this.productView.bindRemoveModal();
     }
 }
@@ -1695,6 +1741,9 @@ parcelHelpers.defineInteropFlag(exports);
 var _endpoint = require("../constants/endpoint");
 const { products } = (0, _endpoint.API_ENDPOINT);
 class ProductModel {
+    deleteProduct(id) {
+        throw new Error("Method not implemented.");
+    }
     constructor(httpService){
         this.processProduct = (product)=>{
             product.quantity = parseInt(product.quantity);
@@ -1730,6 +1779,11 @@ class ProductModel {
                 ...item,
                 ...data
             } : item);
+        return this.products;
+    }
+    async deleteProducts(id) {
+        const data = await this.httpService.delete(`${products}/${id}`);
+        if (data) this.products = this.products.filter((item)=>item.id !== id);
         return this.products;
     }
 }

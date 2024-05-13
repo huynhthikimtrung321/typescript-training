@@ -130,7 +130,7 @@ export default class ProductView {
     }
   }
 
-  //Render select HTML options based on `options` array.
+  // Renders options for a category select element from a provided array of SelectStatusOption
   renderStatusSelectOptions = (
     elementId: string,
     options: SelectStatusOption[]
@@ -176,6 +176,7 @@ export default class ProductView {
     });
   };
 
+  // Renders options for a category select element from a provided array of SelectCategoryOption
   renderCategorySelectOptions = (
     elementId: string,
     options: SelectCategoryOption[]
@@ -206,6 +207,7 @@ export default class ProductView {
     }
   };
 
+  // Binds event listeners to the product form for submit actions, validating the form and then either adding or editing a product.
   bindProductAction(
     handleAddProduct: (product: Product) => Promise<void>,
     handleEditProduct: (id: string, product: Product) => Promise<void>
@@ -297,6 +299,7 @@ export default class ProductView {
     });
   }
 
+  // remove modals by clicking outside
   bindRemoveModal() {
     document.addEventListener('mousedown', (event: MouseEvent) => {
       const target = event.target as HTMLElement;
@@ -307,6 +310,7 @@ export default class ProductView {
     });
   }
 
+  // Binds events for product search and filter functionality
   bindFilterProduct = (
     renderProducts: (params: FilterParam, products: Product[]) => Promise<void>
   ) => {
@@ -354,6 +358,7 @@ export default class ProductView {
     });
   };
 
+  // Binds click events to allow for sorting of products displayed in the list based on different product attributes.
   bindSortProduct(handleSortProducts: (params: FilterParam) => Promise<void>) {
     this.mainContent.addEventListener('click', event => {
       void (async () => {
@@ -401,6 +406,7 @@ export default class ProductView {
     });
   }
 
+  // Specific binding for hiding the delete product modal when clicking outside of it.
   bindRemoveModalDelete() {
     const modalDelete = document.querySelector(
       '.modal-delete-container'

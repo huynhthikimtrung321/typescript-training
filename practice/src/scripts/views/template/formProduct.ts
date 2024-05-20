@@ -1,10 +1,5 @@
 import { Product } from 'scripts/types/product';
-import {
-  PRODUCT_STATUS_LABEL,
-  PRODUCT_STATUS_OPTIONS,
-  PRODUCT_TYPE,
-  PRODUCT_TYPE_OPTIONS,
-} from 'scripts/constants/labels';
+import { PRODUCT_STATUS_LABEL, PRODUCT_TYPE } from 'scripts/constants/labels';
 
 export const formProductTemplate = (isEditForm: boolean, data?: Product) => {
   const {

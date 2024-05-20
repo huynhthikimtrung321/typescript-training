@@ -1,4 +1,4 @@
-export const NOTIFY_MESSAGES = {
+export const NOTIFY_MSG = {
   ADD_SUCCESS_MSG: 'Product added successfully',
   ADD_FAILED_MSG: 'Adding failed products',
   EDIT_SUCCESS_MSG: 'Product edited successfully',

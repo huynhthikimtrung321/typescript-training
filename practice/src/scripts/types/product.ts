@@ -1,6 +1,14 @@
+export type Category = 'Skin care' | 'Face care' | 'Lips care';
+export type Status =
+  | 'bestSeller'
+  | 'poorSeller'
+  | 'onSale'
+  | 'newArrival'
+  | 'lowStock';
+
 export interface Product {
   id: string;
-  category: 'Skin care' | 'Face care' | 'Lips care';
+  category: Category;
   cost: number;
   name: string;
   price: number;

@@ -1,4 +1,4 @@
-import { LabelHtml } from '@/types/label';
+import { Label } from '@/types/label';
 
 interface ProductStatusLabel {
   [key: string]: string;
@@ -67,7 +67,7 @@ export const PRODUCT_STATUS_OPTIONS = [
   },
 ];
 
-export const PRODUCT_LABELS: LabelHtml = [
+export const PRODUCT_LABELS: Label = [
   {
     field: 'name',
     label: 'Product name',

@@ -7,8 +7,8 @@ import {
   ProductTypeOptions,
 } from '../constants/selectOption';
 import { PRODUCT_LABELS, PRODUCT_STATUS_LABEL } from '@/constants/labels';
-import { LabelHtml } from '@/types/label';
-import { Product } from '@/types/product';
+import { Label } from '@/types/label';
+import { Category, Product } from '@/types/product';
 import { FilterParam } from '@/types/params';
 import icon from '../../asset/images/icon.svg';
 import { formProductTemplate } from './template/formProduct';
@@ -199,7 +199,7 @@ export default class ProductView {
     );
     let headerHtml = ``;
     for (const label of labelHtmls) {
-      const labelHtml = `<div data-field="${label.field}" data-sort-label="true" ${label.label !== 'Action' ? `class="arrow-down-up"` : ''}>${label.label}</div>`;
+      const Label = `<div data-field="${label.field}" data-sort-label="true" ${label.label !== 'Action' ? `class="arrow-down-up"` : ''}>${label.label}</div>`;
       headerHtml += labelHtml;
     }
     if (tableHeaderElement) {
@@ -224,7 +224,7 @@ export default class ProductView {
         const formElement = document.querySelector(
           '.form-container'
         ) as HTMLFormElement;
-        const formData = new FormData(formElement);
+        const formData = new FormData(formElement); // formd
         const productId = target.dataset['productId'];
         const formFields: FormField[] = [
           {
@@ -286,7 +286,7 @@ export default class ProductView {
           quantity: parseInt(formData.get('quantity') as string),
           price: parseFloat(formData.get('price') as string),
           cost: parseFloat(formData.get('cost') as string),
-          category: formData.get('category'),
+          category: formData.get('category') as Category,
           status: formData.get('status'),
         };
 

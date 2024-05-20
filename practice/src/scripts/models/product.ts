@@ -5,7 +5,7 @@ import { Product } from 'scripts/types/product';
 const { products } = API_ENDPOINT;
 
 export default class ProductModel {
-  deleteProduct(id: string) {
+  deleteProduct() {
     throw new Error('Method not implemented.');
   }
   private httpService: HttpService;
@@ -15,12 +15,6 @@ export default class ProductModel {
     this.httpService = httpService;
     this.products = [];
   }
-
-  processProduct = (product: any) => {
-    product.quantity = parseInt(product.quantity);
-    product.price = parseFloat(product.price);
-    product.cost = parseFloat(product.cost);
-  };
 
   /**
    * Fetchs products by params

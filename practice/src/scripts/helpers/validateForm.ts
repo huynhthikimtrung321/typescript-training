@@ -9,7 +9,7 @@ type FieldValidator = {
 
 type Validator = (value: string, target?: FieldValidator) => string;
 
-type ProductFields =
+type ProductFieldss =
   | 'name'
   | 'price'
   | 'sku'
@@ -19,7 +19,7 @@ type ProductFields =
   | 'category';
 
 export type FormError = {
-  [key in ProductFields]?: string;
+  [key in ProductFieldss]?: string;
 };
 
 export type FormField = {
@@ -91,7 +91,7 @@ const renderErrorMessages = (
   errorMsgElements.forEach(element => {
     const field = element.dataset['fieldError'];
     if (field) {
-      element.textContent = formError[field as ProductFields] ?? '';
+      element.textContent = formError[field as ProductFieldss] ?? '';
     }
   });
 };

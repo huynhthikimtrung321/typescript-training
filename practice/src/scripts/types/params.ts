@@ -1,4 +1,5 @@
 export type FilterParam = {
+  sortBy: string;
   name?: string;
   status?: string;
   category?: string;

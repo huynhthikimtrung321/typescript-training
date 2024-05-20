@@ -6,7 +6,7 @@ export const withApiErrorHandler = async <T>(
   try {
     const response: AxiosResponse<T> = await promiseFunction();
     return response.data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Error handling with 'any' type to enable property access below
     const axiosError = error as AxiosError; // Casting error to AxiosError for TypeScript type safety
     if (!axiosError.response) {

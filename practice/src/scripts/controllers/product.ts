@@ -3,7 +3,7 @@ import { FilterParam } from 'scripts/types/params';
 import { Product } from 'scripts/types/product';
 import ProductView from 'scripts/views/product';
 import { showError, showSuccess } from 'scripts/views/toast';
-import { NOTIFY_MESSAGES } from '../constants/message';
+import { NOTIFY_MSG } from '../constants/message';
 
 const {
   ADD_SUCCESS_MSG,
@@ -12,7 +12,7 @@ const {
   EDIT_FAILED_MSG,
   DELETE_SUCCESS_MSG,
   DELETE_FAILED_MSG,
-} = NOTIFY_MESSAGES;
+} = NOTIFY_MSG;
 
 export default class ProductController {
   private productView: ProductView;

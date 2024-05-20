@@ -3,4 +3,4 @@ type Label = {
   label: string;
 };
 
-export type LabelHtml = Label[];
+export type Label = Label[];
